@@ -18,7 +18,7 @@ if [ "$1" == "setup" ]; then
   && apt upgrade -y \
   && rm -rf ghost; git clone https://github.com/pietrangelo/ghost-docker-compose ghost \
   && cd ghost \
-  && sed -e "s/<domain>/$2/g" docker-compose.yml \
+  && sed -e "s/<domain>/$2/g" docker-compose.yaml \
   && sed -e "s/<domain>/$2/g" nginx/default.conf \
   && sed -e "s/<domain>/$2/g" config.production.json \
   && echo 'Installing SSL...' \
