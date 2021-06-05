@@ -25,10 +25,10 @@ if [ "$1" == "setup" ]; then
   && sudo dnf install certbot python3-certbot-nginx \
   && sudo certbot certonly --standalone -d $2 \
   && echo 'Installing Docker Compose...' \
-  && curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose \
-  && chmod +x /usr/local/bin/docker-compose \
+  && sudo curl -L https://github.com/docker/compose/releases/download/1.29.2/docker-compose-`uname -s`-`uname -m` -o /usr/local/bin/docker-compose \
+  && sudo chmod +x /usr/local/bin/docker-compose \
   && echo 'Preparing Ghost...' \
-  && mkdir ./content; mkdir ./mysql; mkdir -p /usr/share/nginx/html;
+  && mkdir ./content; mkdir ./mysql; sudo mkdir -p /usr/share/nginx/html;
   echo 'Configuring cron...' \
   && echo "0 23 * * * certbot certonly -n --webroot -w /usr/share/nginx/html -d $2 --deploy-hook='docker exec ghost_nginx_1 nginx -s reload'" >> mycron \
   && crontab mycron; rm mycron \
